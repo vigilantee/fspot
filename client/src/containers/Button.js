@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getNews } from '../actions'
+import { getMenu } from '../actions'
 
 let styles = {
   backgroundColor: 'HotPink ',
@@ -23,15 +23,15 @@ class Button extends React.Component {
       <button style={!this.state.hover ? styles : { ...styles, backgroundColor: 'DarkTurquoise ' }}
         onMouseOut={() => { this.setState({ hover: false }) }}
         onMouseOver={() => { this.setState({ hover: true }) }}
-        onClick={this.props.getNews}
-      >Press to see News</button>
+        onClick={this.props.getMenu}
+      >Press to see Menu</button>
     );
   }
 
 };
 
 const mapDispatchToProps = {
-  getNews: getNews,
+  getMenu: getMenu,
 };
 
 Button = connect(

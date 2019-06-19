@@ -1,4 +1,4 @@
-export const getNews = () => ({
-  type: 'GET_NEWS',
+export const getMenu = () => ({
+  type: 'GET_MENU',
 });
 

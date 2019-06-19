@@ -14,7 +14,7 @@ const articleStyle = {
   color: 'olive'
 }
 
-let NewsItem = ({ article }) => (
+let MenuItem = ({ article }) => (
   article ?
     <article style={articleStyle} >
       <div>
@@ -28,14 +28,14 @@ let NewsItem = ({ article }) => (
 );
 
 const mapStateToProps = (state) => ({
-  article: state.news,
+  article: state.menu,
 })
 
-NewsItem = connect(
+MenuItem = connect(
   mapStateToProps,
   null
-)(NewsItem)
+)(MenuItem)
 
-export default NewsItem;
+export default MenuItem;
 
 

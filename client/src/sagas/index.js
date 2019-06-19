@@ -1,15 +1,15 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
+import { GET_MENU } from '../ApiConstants';
 
-function* fetchNews() {
+function* fetchMenu() {
+  const json = yield fetch(GET_MENU)
+    .then(response => response.json()).then(response=>console.log("resp is ....", response));
 
-  const json = yield fetch('https://newsapi.org/v1/articles?source=cnn&apiKey=c39a26d9c12f48dba2a5c00e35684ecc')
-    .then(response => response.json(), );
-
-  yield put({ type: "NEWS_RECEIVED", json: json.articles, });
+  yield put({ type: "MENU_RECEIVED", json: json.articles, });
 }
 
 function* actionWatcher() {
-  yield takeLatest('GET_NEWS', fetchNews)
+  yield takeLatest('GET_MENU', fetchMenu)
 }
 
 
