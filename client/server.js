@@ -14,7 +14,7 @@ app.use(express.static( __dirname + "/dist"));
 //app.use('/material-dashboard-react', express.static(__dirname + "/build"));
 // Redirect all traffic to the index
 app.get("*", function(req, res){
-  res.sendFile(__dirname + "/build/index.html");
+  res.sendFile(__dirname + "/dist/index.html");
 });
 // Listen to port 3000
 app.listen(process.env.PORT || 3000);
