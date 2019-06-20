@@ -5,9 +5,7 @@ import HomeScreen from './HomeScreen/HomeScreen';
 class App extends React.Component {
   render() {
     return (
-        <div>
-            <HomeScreen />
-        </div>
+      <HomeScreen />
     );
   }
 }

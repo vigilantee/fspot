@@ -30,7 +30,7 @@ class HomeScreen extends React.Component {
     if(!this.props.menu.loaded)
       return <div>Loading...</div>;
     return (
-        <div>
+        <div style={{display:"flex",flexWrap:"wrap", flexDirection:"row", flex:1}}>
           {this.renderCards()}
         </div>
     );
