@@ -6,6 +6,7 @@ import Card from '../../components/FoodCard/FoodCard';
 
 
 class HomeScreen extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +14,7 @@ class HomeScreen extends React.Component {
     };
     this.props.getMenu();
   }
+
   updateInputValue(val) {
     const re = /^[0-9\b]+$/;
     if (val === '' || re.test(val)) {
@@ -21,30 +23,43 @@ class HomeScreen extends React.Component {
       })
     }
   }
+
   handleIncreament() {
     const currentVal = (isNaN(parseInt(this.state.count)))?0:parseInt(this.state.count);
     this.setState({
       count: currentVal + 1
     });
   }
+
   handleDecreament() {
     this.setState({
       count: this.state.count > 0 ? this.state.count - 1 : 0
     });
   }
+
+  renderCards = () => {
+    return this.props.menu.menu.map(item=>{
+      return (
+        <Card
+        props={item}
+        count={this.props.menu.quantity[i]}
+        plus={() => this.handleIncreament()}
+        minus={() => this.handleDecreament()}
+        updateInputValue={(e)=>this.updateInputValue(e)}
+        />
+      );
+    })
+  }
+
   render() {
     if(!this.props.menu.loaded) return <div>loading...</div>;
     console.log("the menu integration is.....", this.props.menu);
     const props = this.props.menu.menu[1];
     
     return (
-        <Card
-          props={props}
-          count={this.state.count}
-          plus={() => this.handleIncreament()}
-          minus={() => this.handleDecreament()}
-          updateInputValue={(e)=>this.updateInputValue(e)}
-        />
+      <div>
+        {this.renderCards()}
+      </div>
     );
   }
 }

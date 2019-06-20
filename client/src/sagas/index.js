@@ -1,15 +1,11 @@
 import { put, takeLatest, all } from 'redux-saga/effects';
 import { GET_MENU } from '../ApiConstants';
+import * as constants from './ActionConstants';
+import fetchMenu from './fetchMenuSaga';
 
-function* fetchMenu() {
-  const data = yield fetch(GET_MENU)
-    .then(response => response.json())
-
-  yield put({ type: "MENU_RECEIVED", data: data, });
-}
 
 function* actionWatcher() {
-  yield takeLatest('GET_MENU', fetchMenu)
+  yield takeLatest(constants.GET_MENU, fetchMenu)
 }
 
 

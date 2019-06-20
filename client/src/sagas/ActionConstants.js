@@ -1,0 +1,2 @@
+export const GET_MENU = 'GET_MENU';
+export const INCREMENT_QUANTITY = 'INCREMENT_QUANTITY';
