@@ -1,9 +1,26 @@
 import React from "react";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
+import veg from '../../assets/veg.png';
+import nonveg from '../../assets/nonveg.png';
+
 const FoodCard = data => {
-  const { props, logo, count, plus, minus, updateInputValue } = data;
+  const { props, count, plus, minus, updateInputValue } = data;
+  const image = props.type == "veg" ? veg : nonveg;
+  const cardBgColor = props.type == "veg" ? "#008200" : "#BF3304";
   return (
+
+    <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      flex: 1,
+      margin: 20,
+      width: 400,
+      backgroundColor: "powderblue",
+      border: `5px solid ${cardBgColor}`
+    }}
+  >
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
@@ -24,11 +41,10 @@ const FoodCard = data => {
               fontSize: 16
             }}
           >
-            <img src={logo} style={{ height: 20, width: 20 }} />
+            <img src={image} style={{ height: 20, width: 20 }} />
             <b>{props.name}</b>
           </div>
-          <b>&#x20b9;</b>
-          <b>{props.price}</b>
+          &#x20b9;{props.price}
           <div style={{ display: "flex" }}>
             <p>Qty</p>
             <button
@@ -80,7 +96,7 @@ const FoodCard = data => {
           Add to cart
         </div>
       </button>
-    </div>
+    </div></div>
   );
 };
 

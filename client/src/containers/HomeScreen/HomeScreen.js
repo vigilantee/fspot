@@ -71,31 +71,18 @@ class HomeScreen extends React.Component {
     });
   }
   render() {
+    if(!this.props.menu.loaded)
+      return <div>Loading...</div>;
     console.log("the menu integration is.....", this.props.menu);
-    const props = menulist[0];
-    const image = props.type == "veg" ? veg : nonveg;
-    const cardBgColor = props.type == "veg" ? "#008200" : "#BF3304";
+    const props = this.props.menu.menu[0];
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          margin: 20,
-          width: 400,
-          backgroundColor: "powderblue",
-          border: `5px solid ${cardBgColor}`
-        }}
-      >
         <Card
           props={props}
-          logo={image}
           count={this.state.count}
           plus={() => this.handleIncreament()}
           minus={() => this.handleDecreament()}
           updateInputValue={(e)=>this.updateInputValue(e)}
         />
-      </div>
     );
   }
 }
@@ -106,7 +93,7 @@ const mapDispatchToProps = {
 
 function mapStateToProps (state){
   return {
-    menu: state.menu.menu,
+    menu: state.menu,
   }
 }
 
