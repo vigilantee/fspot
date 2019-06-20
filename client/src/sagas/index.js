@@ -8,13 +8,30 @@ function* fetchMenu() {
   yield put({ type: "MENU_RECEIVED", data: data, });
 }
 
+function* incrementItem() {
+  yield put({ type: "INCREMENT_ITEM", data: data, })
+}
+
+function* decrementItem() {
+  yield put({ type: "DECREMENT_ITEM", data: data, })
+}
+
 function* actionWatcher() {
   yield takeLatest('GET_MENU', fetchMenu)
 }
 
+function* incrementActionWatcher() {
+  yield takeLatest('INCREMENT_ITEM', incrementItem);
+}
+
+function* decrementActionWatcher() {
+  yield takeLatest('DECREMENT_ITEM', decrementItem);
+}
 
 export default function* rootSaga() {
   yield all([
     actionWatcher(),
+    incrementActionWatcher(),
+    decrementActionWatcher()
   ]);
 }

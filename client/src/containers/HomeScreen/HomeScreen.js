@@ -1,46 +1,10 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { getMenu } from '../../actions';
+import { getMenu, incrementQuantity, decrementQuantity, updateItem } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
-
-const menulist=[
-    {
-        name:"pizza ",
-        price:"100",
-        type:"nonveg",
-        details:"Finger Licking pizza",
-        "image_url":"https://i0.wp.com/lazizkhana.com/wp-content/uploads/2015/09/momos.jpg?w=640&ssl=1"
-    },
-    {
-        
-        name:"combo pizza ",
-        price:"200",
-        type:"veg",
-        details:"Finger Licking pizza",
-        "image_url":"http://www.theterracekitchen.in/wp-content/uploads/2017/09/LREdit_Wordpress-5638.jpg"
-    },
-    {
-    
-        name:"double pizza",
-        price:"300",
-        type:"veg",
-        details:"Finger Licking pizza",
-        "image_url":"http://www.theterracekitchen.in/wp-content/uploads/2017/09/LREdit_Wordpress-5638.jpg"
-    },
-    {
-        
-        name:"burger",
-        price:"125",
-        type:"nonveg",
-        details:"Finger Licking pizza",
-        "image_url":"http://www.theterracekitchen.in/wp-content/uploads/2017/09/LREdit_Wordpress-5638.jpg"
-    }
-  ]
-  
-// <CardComponent key={0}  details={menulist[0]} veg={veg} nonveg={nonVeg}/>
 
 
 class HomeScreen extends React.Component {
@@ -78,10 +42,10 @@ class HomeScreen extends React.Component {
     return (
         <Card
           props={props}
-          count={this.state.count}
-          plus={() => this.handleIncreament()}
-          minus={() => this.handleDecreament()}
-          updateInputValue={(e)=>this.updateInputValue(e)}
+          count={this.props.menu.itemsQuantity[0]}
+          plus={() => this.props.incrementQuantity(0)}
+          minus={() => this.props.decrementQuantity(0)}
+          updateInputValue={(e)=>this.props.updateItem(e,0)}
         />
     );
   }
@@ -89,6 +53,9 @@ class HomeScreen extends React.Component {
 
 const mapDispatchToProps = {
   getMenu: getMenu,
+  incrementQuantity: incrementQuantity,
+  decrementQuantity: decrementQuantity,
+  updateItem: updateItem
 };
 
 function mapStateToProps (state){
