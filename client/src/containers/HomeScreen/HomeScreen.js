@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
+
+import { getMenu } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
@@ -40,12 +43,13 @@ const menulist=[
 // <CardComponent key={0}  details={menulist[0]} veg={veg} nonveg={nonVeg}/>
 
 
-class CardComponent extends React.Component {
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0
     };
+    this.props.getMenu();
   }
   updateInputValue(val) {
     this.setState({
@@ -63,6 +67,7 @@ class CardComponent extends React.Component {
     });
   }
   render() {
+    console.log("the menu integration is.....", this.props.menu);
     const props = menulist[0];
     const image = props.type == "veg" ? veg : nonveg;
     const cardBgColor = props.type == "veg" ? "#008200" : "#BF3304";
@@ -90,4 +95,16 @@ class CardComponent extends React.Component {
     );
   }
 }
-export default CardComponent;
+
+const mapDispatchToProps = {
+  getMenu: getMenu,
+};
+
+function mapStateToProps (state){
+  return {
+    menu: state.menu.menu,
+  }
+}
+
+export default connect( mapStateToProps,mapDispatchToProps)(HomeScreen);
+

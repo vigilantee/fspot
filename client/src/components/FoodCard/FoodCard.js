@@ -70,7 +70,7 @@ const FoodCard = data => {
           justifyContent: "center"
         }}
       >
-        <text
+        <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -78,7 +78,7 @@ const FoodCard = data => {
           }}
         >
           Add to cart
-        </text>
+        </div>
       </button>
     </div>
   );
