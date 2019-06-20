@@ -27,3 +27,11 @@ export const updateItem = (data, i) => {
     index: i
   }
 };
+
+export const addToCart = (data, i) => {
+  return {
+    type: 'ADD_TO_CART',
+    data: data,
+    index: i
+  }
+}

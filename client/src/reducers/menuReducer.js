@@ -11,9 +11,10 @@ const menuReducer = (state = initialState, action) => {
             return { ...state, loading: true };
         case 'MENU_RECEIVED':
             action.data.map(elem => state.itemsQuantity.push(0));
-            return { ...state, menu: action.data, loading: false, loaded: true };
+            state.cart = state.itemsQuantity;
+            return { ...state, menu: action.data, cart: state.cart, itemsQuantity:state.itemsQuantity, loading: false, loaded: true };
         case 'INCREMENT_ITEM':
-            const currentVal = (isNaN(parseInt(state.itemsQuantity[action.data])))?0:parseInt(state.itemsQuantity[action.data]);
+            const currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
             state.itemsQuantity.splice(action.data, 1, currentVal + 1);
             return { ...state, itemsQuantity: state.itemsQuantity };
         case 'DECREMENT_ITEM':
@@ -27,6 +28,12 @@ const menuReducer = (state = initialState, action) => {
                 return { ...state, itemsQuantity: state.itemsQuantity };
             }
             return state;
+        case 'ADD_TO_CART':
+            const reg = /^[0-9\b]+$/;
+            if (action.data === '' || reg.test(action.data)) {
+                state.cart.splice(action.index, 1, action.data);
+                return { ...state, cart: state.cart };
+            }
         default:
             return state;
     }

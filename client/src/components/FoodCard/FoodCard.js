@@ -5,7 +5,7 @@ import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
 
 const FoodCard = data => {
-  const { props, count, plus, minus, updateInputValue } = data;
+  const { props, count, plus, minus, updateInputValue, addToCart } = data;
   const image = props.type == "veg" ? veg : nonveg;
   const cardBgColor = props.type == "veg" ? "#008200" : "#BF3304";
   return (
@@ -84,6 +84,7 @@ const FoodCard = data => {
             alignItems: "center",
             justifyContent: "center"
           }}
+          onClick={()=>addToCart(count)}
         >
           <div
             style={{

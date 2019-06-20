@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { getMenu, incrementQuantity, decrementQuantity, updateItem } from '../../actions';
+import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
@@ -22,6 +22,7 @@ class HomeScreen extends React.Component {
         plus={() => this.props.incrementQuantity(i)}
         minus={() => this.props.decrementQuantity(i)}
         updateInputValue={(e)=>this.props.updateItem(e,i)}
+        addToCart={(e)=>this.props.addToCart(e,i)}
       />
     }));
   }
@@ -41,7 +42,8 @@ const mapDispatchToProps = {
   getMenu: getMenu,
   incrementQuantity: incrementQuantity,
   decrementQuantity: decrementQuantity,
-  updateItem: updateItem
+  updateItem: updateItem,
+  addToCart: addToCart
 };
 
 function mapStateToProps (state){
