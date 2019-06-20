@@ -60,8 +60,9 @@ class HomeScreen extends React.Component {
     }
   }
   handleIncreament() {
+    const currentVal = (isNaN(parseInt(this.state.count)))?0:parseInt(this.state.count);
     this.setState({
-      count: parseInt(this.state.count) + 1
+      count: currentVal + 1
     });
   }
   handleDecreament() {
