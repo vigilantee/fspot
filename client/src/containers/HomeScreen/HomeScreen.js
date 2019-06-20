@@ -52,9 +52,12 @@ class HomeScreen extends React.Component {
     this.props.getMenu();
   }
   updateInputValue(val) {
-    this.setState({
-      count:val
-    })
+    const re = /^[0-9\b]+$/;
+    if (val === '' || re.test(val)) {
+      this.setState({
+        count:val
+      })
+    }
   }
   handleIncreament() {
     this.setState({
