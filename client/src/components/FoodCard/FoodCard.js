@@ -16,6 +16,8 @@ const FoodCard = data => {
         flex: 1,
         margin: 20,
         maxWidth: 400,
+        height:430,
+        borderRadius: 5,
         backgroundColor: "powderblue",
         border: `5px solid ${cardBgColor}`
       }}
@@ -61,7 +63,7 @@ const FoodCard = data => {
                   width: 30,
                   textAlign: "center"
                 }}
-                value={count}
+                value={count!=0?count:1}
                 onChange={evt => updateInputValue(evt.target.value)}
               />
               <button
@@ -79,10 +81,13 @@ const FoodCard = data => {
         <button
           style={{
             display: "flex",
-            flex: 1,
-            flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            width:200,
+            marginBottom:8,
+            height: 30,
+            borderRadius: 5,
+            outline: "none"
           }}
           onClick={()=>addToCart(count)}
         >

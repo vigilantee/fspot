@@ -16,8 +16,9 @@ const menuReducer = (state = initialState, action) => {
             state.cart = state.itemsQuantity.slice();
             return { ...state, menu: action.data, cart: state.cart, itemsQuantity: state.itemsQuantity, loading: false, loaded: true };
         case 'INCREMENT_ITEM':
-            const currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
-            state.itemsQuantity.splice(action.data, 1, currentVal + 1);
+            let currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
+            currentVal=currentVal==0?2:currentVal+1;
+            state.itemsQuantity.splice(action.data, 1, currentVal);
             return { ...state, itemsQuantity: state.itemsQuantity };
         case 'DECREMENT_ITEM':
             const newVal = state.itemsQuantity[action.data] > 0 ? state.itemsQuantity[action.data] - 1 : 0;
