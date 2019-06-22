@@ -1,7 +1,6 @@
 import React from "react";
-// import { Route, Switch } from 'react-router-dom'
-
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import HomeScreen from './HomeScreen/HomeScreen';
 import CartSummary from './CartSummary/CartSummary';
 
