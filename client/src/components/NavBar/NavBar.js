@@ -1,11 +1,28 @@
-import React from 'react';
+import React from "react";
+import { Sticky } from "react-sticky";
 
-class NavBar extends React.Component {
-    render() {
-        return (
-            <div>test</div>
-        );
+const NavBar = () => (
+<div> test
+  </div>
+)
+
+const StickyBar = () => (
+  <Sticky>
+    {({
+      style,
+      // the following are also available but unused in this example
+      isSticky,
+      wasSticky,
+      distanceFromTop,
+      distanceFromBottom,
+      calculatedHeight
+    }) => (
+      <div style={style}>
+      {NavBar()}
+      </div>
+      )
     }
-}
+  </Sticky>
+);
 
-export default NavBar;
+export default StickyBar;

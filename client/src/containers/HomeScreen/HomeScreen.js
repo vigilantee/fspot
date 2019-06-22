@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
-import Navbar from "../../components/NavBar/NavBar";
 
 
 
@@ -33,7 +32,6 @@ class HomeScreen extends React.Component {
       return <div>Loading...</div>;
     return (
       <div>
-        <Navbar />
         <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", flex: 1 }}>
           {this.renderCards()}
         </div>

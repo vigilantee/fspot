@@ -1,0 +1,80 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add @emotion react-sticky-nav
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/abhishekjha/anaconda3/bin:/anaconda3/condabin
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  10.15.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@emotion: Request "https://registry.yarnpkg.com/@emotion" returned a 405
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66100:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:129590:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130562:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130484:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+    "name": "sagaTut",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "webpack-dev-server --mode development --open",
+      "dev": "webpack --mode development",
+      "build": "webpack --mode production"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "babel-cli": "^6.26.0",
+      "babel-core": "^6.26.3",
+      "babel-loader": "^7.1.4",
+      "babel-plugin-react-flow-props-to-prop-types": "^0.15.0",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-plugin-transform-runtime": "^6.23.0",
+      "babel-preset-env": "^1.7.0",
+      "babel-preset-flow": "^6.23.0",
+      "babel-preset-react": "^6.24.1",
+      "babel-runtime": "^6.26.0",
+      "css-loader": "^0.28.11",
+      "file-loader": "^1.1.11",
+      "html-loader": "^0.5.5",
+      "html-webpack-plugin": "^3.2.0",
+      "react-dom": "^16.4.1",
+      "redux": "^4.0.0",
+      "redux-logger": "^3.0.6",
+      "redux-saga": "^0.16.0",
+      "style-loader": "^0.21.0",
+      "webpack": "^4.12.0",
+      "webpack-cli": "^3.0.6",
+      "webpack-dev-server": "^3.1.4"
+    },
+    "dependencies": {
+      "helmet": "^3.18.0",
+      "morgan": "^1.9.1",
+      "react": "^16.4.1",
+      "react-icons": "^3.7.0",
+      "react-redux": "^5.0.7"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
