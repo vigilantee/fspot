@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
-
+import Navbar from "../../components/NavBar/NavBar";
 
 
 class HomeScreen extends React.Component {
@@ -32,9 +32,14 @@ class HomeScreen extends React.Component {
       return <div>Loading...</div>;
     return (
       <div>
-        <div style={{ display: "flex", flexWrap: "wrap",flex: 1, justifyContent:"center" }}>
-          {this.renderCards()}
-          {this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}
+        <Navbar />
+        <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
+          <div>
+            <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}>
+              {this.renderCards()}
+              {this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}
+            </div>
+          </div>
         </div>
       </div>
     );
