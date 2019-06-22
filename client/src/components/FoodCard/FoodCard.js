@@ -3,6 +3,8 @@ import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
+import AddToCartButton from '../AddToCartButton/AddToCartButton';
+
 
 const FoodCard = data => {
   const { props, count, plus, minus, updateInputValue, addToCart } = data;
@@ -78,29 +80,9 @@ const FoodCard = data => {
             </div>
           </div>
         </div>
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width:200,
-            marginBottom:8,
-            height: 30,
-            borderRadius: 5,
-            outline: "none"
-          }}
-          onClick={()=>addToCart(count)}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            Add to cart
-        </div>
-        </button>
+        <AddToCartButton count={count} addToCart={addToCart}/>
+
+
       </div></div>
   );
 };

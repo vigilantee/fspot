@@ -3,7 +3,6 @@ const initialState = {
     loading: false,
     itemsQuantity: [], //Maintain the transitional Quantity of the cards
     cart: [], //Maintain product id of the products in the cart
-    // cartQuantity: [], //Maintain quantity of products added to cart
     cartCount: 0
 }
 
@@ -34,10 +33,18 @@ const menuReducer = (state = initialState, action) => {
         case 'ADD_TO_CART':
             const reg = /^[0-9\b]+$/;
             if (action.data === '' || reg.test(action.data)) {
-                state.cart.splice(action.index, 1, action.data);
                 const totalItems = cart => cart.reduce((a,b) => a + b, 0);
-                state.cartCount = totalItems(state.cart.slice());
-                return { ...state, cart: state.cart, cartCount: state.cartCount };
+                if(action.data==0) {
+                    state.itemsQuantity.splice(action.data, 1, 1);
+                    state.cart.splice(action.index, 1,1);
+                    state.cartCount = totalItems(state.cart.slice());
+                    return { ...state, cart: state.cart, cartCount: state.cartCount, cart:state.cart };
+                }
+                else {
+                    state.cart.splice(action.index, 1,action.data);
+                    state.cartCount = totalItems(state.cart.slice());
+                    return { ...state, cart: state.cart, cartCount: state.cartCount };
+                }
             }
         default:
             return state;
