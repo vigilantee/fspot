@@ -1,8 +1,9 @@
 const initialState = {
     loaded: false,
     loading: false,
-    itemsQuantity: [],
-    cart: [],
+    itemsQuantity: [], //Maintain the transitional Quantity of the cards
+    cart: [], //Maintain product id of the products in the cart
+    // cartQuantity: [], //Maintain quantity of products added to cart
     cartCount: 0
 }
 
@@ -12,7 +13,7 @@ const menuReducer = (state = initialState, action) => {
             return { ...state, loading: true };
         case 'MENU_RECEIVED':
             action.data.map(elem => state.itemsQuantity.push(0));
-            state.cart = state.itemsQuantity;
+            state.cart = state.itemsQuantity.slice();
             return { ...state, menu: action.data, cart: state.cart, itemsQuantity: state.itemsQuantity, loading: false, loaded: true };
         case 'INCREMENT_ITEM':
             const currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
@@ -34,7 +35,7 @@ const menuReducer = (state = initialState, action) => {
             if (action.data === '' || reg.test(action.data)) {
                 state.cart.splice(action.index, 1, action.data);
                 const totalItems = cart => cart.reduce((a,b) => a + b, 0);
-                state.cartCount = totalItems(state.cart);
+                state.cartCount = totalItems(state.cart.slice());
                 return { ...state, cart: state.cart, cartCount: state.cartCount };
             }
         default:
