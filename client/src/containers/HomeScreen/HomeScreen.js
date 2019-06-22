@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
       <div>
         <Navbar history={this.props.history}/>
         <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
-          <div>
+        <div style={{display:"flex",flex:1}}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}>
               {this.renderCards()}
               {this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}

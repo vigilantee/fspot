@@ -4,12 +4,25 @@ import { connect } from 'react-redux';
 import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
 import Navbar from "../../components/NavBar/NavBar";
-
+import CartSummaryCard from '../../components/CartSummaryCard/CartSummaryCard';
 
 class CartSummary extends React.Component {
   constructor(props) {
     super(props);
-    this.props.getMenu();
+  }
+
+  renderCartBlades() {
+    return (
+      this.props.menu.menu.map((elem,i) => {
+        return (
+          <CartSummaryCard
+            cartItem={elem}
+            quantity={this.props.menu.cart[i]}
+            key={i}
+          />
+        );
+      })
+    );
   }
 
   render() {
@@ -17,10 +30,12 @@ class CartSummary extends React.Component {
       return <div>Loading...</div>;
     return (
       <div>
-        <Navbar cart={false} history={this.props.history}/>
+        <Navbar cart={false} history={this.props.history} />
         <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
-          <div>
-            <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}></div>
+          <div style={{ display: "flex", flex: 1 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", flex: 1, alignItems: "space-between", flexDirection:"column" }}>
+              {this.renderCartBlades()}
+            </div>
           </div>
         </div>
       </div>

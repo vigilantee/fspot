@@ -16,7 +16,7 @@ const menuReducer = (state = initialState, action) => {
             return { ...state, menu: action.data, cart: state.cart, itemsQuantity: state.itemsQuantity, loading: false, loaded: true };
         case 'INCREMENT_ITEM':
             let currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
-            currentVal=currentVal==0?2:currentVal+1;
+            currentVal = currentVal == 0 ? 2 : currentVal + 1;
             state.itemsQuantity.splice(action.data, 1, currentVal);
             return { ...state, itemsQuantity: state.itemsQuantity };
         case 'DECREMENT_ITEM':
@@ -33,15 +33,15 @@ const menuReducer = (state = initialState, action) => {
         case 'ADD_TO_CART':
             const reg = /^[0-9\b]+$/;
             if (action.data === '' || reg.test(action.data)) {
-                const totalItems = cart => cart.reduce((a,b) => a + b, 0);
-                if(action.data==0) {
+                const totalItems = cart => cart.reduce((a, b) => a + b, 0);
+                if (action.data == 0) {
                     state.itemsQuantity.splice(action.data, 1, 1);
-                    state.cart.splice(action.index, 1,1);
+                    state.cart.splice(action.index, 1, 1);
                     state.cartCount = totalItems(state.cart.slice());
-                    return { ...state, cart: state.cart, cartCount: state.cartCount, cart:state.cart };
+                    return { ...state, cart: state.cart, cartCount: state.cartCount, cart: state.cart };
                 }
                 else {
-                    state.cart.splice(action.index, 1,action.data);
+                    state.cart.splice(action.index, 1, action.data);
                     state.cartCount = totalItems(state.cart.slice());
                     return { ...state, cart: state.cart, cartCount: state.cartCount };
                 }
