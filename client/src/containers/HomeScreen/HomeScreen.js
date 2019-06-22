@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import Card from '../../components/FoodCard/FoodCard';
-import veg from '../../assets/veg.png';
-import nonveg from '../../assets/nonveg.png';
+import Navbar from "../../components/NavBar/NavBar";
+
 
 
 class HomeScreen extends React.Component {
@@ -13,27 +13,31 @@ class HomeScreen extends React.Component {
     this.props.getMenu();
   }
 
-  renderCards () {
+  renderCards() {
     const menu = this.props.menu;
-    return (menu.menu.map((element,i)=>{
+    return (menu.menu.map((element, i) => {
       return <Card
         props={element}
         count={menu.itemsQuantity[i]}
         plus={() => this.props.incrementQuantity(i)}
         minus={() => this.props.decrementQuantity(i)}
-        updateInputValue={(e)=>this.props.updateItem(e,i)}
-        addToCart={(e)=>this.props.addToCart(e,i)}
+        updateInputValue={(e) => this.props.updateItem(e, i)}
+        addToCart={(e) => this.props.addToCart(e, i)}
+        key={i}
       />
     }));
   }
 
   render() {
-    if(!this.props.menu.loaded)
+    if (!this.props.menu.loaded)
       return <div>Loading...</div>;
     return (
-        <div style={{display:"flex",flexWrap:"wrap", flexDirection:"row", flex:1}}>
+      <div>
+        <Navbar />
+        <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", flex: 1 }}>
           {this.renderCards()}
         </div>
+      </div>
     );
   }
 }
@@ -46,10 +50,10 @@ const mapDispatchToProps = {
   addToCart: addToCart
 };
 
-function mapStateToProps (state){
+function mapStateToProps(state) {
   return {
     menu: state.menu,
   }
 }
 
-export default connect( mapStateToProps,mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
