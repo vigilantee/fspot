@@ -2,7 +2,8 @@ const initialState = {
     loaded: false,
     loading: false,
     itemsQuantity: [],
-    cart: []
+    cart: [],
+    cartCount: 0
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ const menuReducer = (state = initialState, action) => {
         case 'MENU_RECEIVED':
             action.data.map(elem => state.itemsQuantity.push(0));
             state.cart = state.itemsQuantity;
-            return { ...state, menu: action.data, cart: state.cart, itemsQuantity:state.itemsQuantity, loading: false, loaded: true };
+            return { ...state, menu: action.data, cart: state.cart, itemsQuantity: state.itemsQuantity, loading: false, loaded: true };
         case 'INCREMENT_ITEM':
             const currentVal = (isNaN(parseInt(state.itemsQuantity[action.data]))) ? 0 : parseInt(state.itemsQuantity[action.data]);
             state.itemsQuantity.splice(action.data, 1, currentVal + 1);
@@ -32,7 +33,9 @@ const menuReducer = (state = initialState, action) => {
             const reg = /^[0-9\b]+$/;
             if (action.data === '' || reg.test(action.data)) {
                 state.cart.splice(action.index, 1, action.data);
-                return { ...state, cart: state.cart };
+                const totalItems = cart => cart.reduce((a,b) => a + b, 0);
+                state.cartCount = totalItems(state.cart);
+                return { ...state, cart: state.cart, cartCount: state.cartCount };
             }
         default:
             return state;
