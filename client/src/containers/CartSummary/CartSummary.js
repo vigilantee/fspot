@@ -17,7 +17,7 @@ class CartSummary extends React.Component {
       return <div>Loading...</div>;
     return (
       <div>
-        <Navbar cart={false}/>
+        <Navbar cart={false} history={this.props.history}/>
         <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
           <div>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}></div>
