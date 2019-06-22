@@ -1,28 +1,13 @@
 import React from "react";
-import { Sticky } from "react-sticky";
 
 const NavBar = () => (
-<div> test
+  <div style={{ backgroundColor: "#CB202D", color: "white", width: "100%", position: "fixed", top: 0, left: 0, zIndex: 70, height: 70, padding: 5 }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginLeft: 150, marginRight: 150, paddingLeft:20,paddingRight:20, height: "100%" }}>
+      <img src={require('../../assets/logo.png')} style={{height:70}}/>
+      <div>logo</div>
+      test inside
+    </div>
   </div>
 )
 
-const StickyBar = () => (
-  <Sticky>
-    {({
-      style,
-      // the following are also available but unused in this example
-      isSticky,
-      wasSticky,
-      distanceFromTop,
-      distanceFromBottom,
-      calculatedHeight
-    }) => (
-      <div style={style}>
-      {NavBar()}
-      </div>
-      )
-    }
-  </Sticky>
-);
-
-export default StickyBar;
+export default NavBar;

@@ -32,8 +32,9 @@ class HomeScreen extends React.Component {
       return <div>Loading...</div>;
     return (
       <div>
-        <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", flex: 1 }}>
+        <div style={{ display: "flex", flexWrap: "wrap",flex: 1, justifyContent:"center" }}>
           {this.renderCards()}
+          {this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}
         </div>
       </div>
     );
