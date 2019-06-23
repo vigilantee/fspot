@@ -9,7 +9,6 @@ import AddToCartButton from '../AddToCartButton/AddToCartButton';
 const FoodCard = data => {
     const { cartItem, quantity } = data;
     const mark = cartItem.type == "veg" ? veg : nonveg;
-    console.log("cart item is ....", cartItem);
     const netPrice = cartItem.price*quantity;
     return (
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flex: 1,height:224, marginBottom:20}}>

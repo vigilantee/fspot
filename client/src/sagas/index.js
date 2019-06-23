@@ -2,7 +2,6 @@ import { put, takeLatest, all } from 'redux-saga/effects';
 import { GET_MENU } from '../ApiConstants';
 
 function* fetchMenu() {
-  console.log("saga index file");
   const data = yield fetch(GET_MENU)
     .then(response => response.json())
   yield put({ type: "MENU_RECEIVED", data: data, });
@@ -13,12 +12,12 @@ function* incrementItem() {
 }
 
 function* addToCart() {
-  yield put({ type: "ADD_TO_CART", data: data, })
+  yield put({ type: "ADD_TO_CART",data: data, })
 }
 
 
 function* decrementItem() {
-  yield put({ type: "DECREMENT_ITEM", data: data, })
+  yield put({ type: "DECREMENT_ITEM",data: data, })
 }
 
 function* actionWatcher() {

@@ -6,16 +6,26 @@ import { Provider } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
+import { createTransform } from 'redux-persist';
 
 import { logger } from 'redux-logger';
 import rootReducer from './reducers';
 import App from './containers/App';
 import rootSaga from './sagas';
+import omit from 'lodash/omit'
 
+const blacklistPaths = ['menu.loaded','menu.menu'];
 
 const persistConfig = {
   key: 'root',
   storage,
+	blacklist: blacklistPaths.filter(a => !a.includes('.')),
+	transforms: [
+		// nested blacklist-paths require a custom transform to be applied
+		createTransform((inboundState, key) => {
+			const blacklistPaths_forKey = blacklistPaths.filter(path => path.startsWith(`${key}.`)).map(path => path.substr(key.length + 1));
+			return omit(inboundState, ...blacklistPaths_forKey);
+		}, null),]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
