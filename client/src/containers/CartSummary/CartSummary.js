@@ -14,13 +14,12 @@ class CartSummary extends React.Component {
 
   renderCartBlades() {
     return (
-      this.props.menu.menu.filter((elem,i)=> this.props.menu.cart[i]==0?0:elem).map((elem,i) => {
+      this.props.menu.menu.map((elem,i) => {
+        if(this.props.menu.cart[i]==0) return null;
         return (
           <CartSummaryCard
             cartItem={elem}
             quantity={this.props.menu.cart[i]}
-            plus={() => this.props.incrementQuantity(i)}
-            minus={() => this.props.decrementQuantity(i)}
             count={this.props.menu.cart[i]}
             key={i}
             addToCart={(data)=>this.props.addToCart(data, i)}
@@ -36,7 +35,7 @@ class CartSummary extends React.Component {
     return (
       <div>
         <Navbar cart={false} history={this.props.history} />
-        <div style={{ marginRight: 250, marginLeft: 250, flexDirection: "column", marginTop: 100, display: "flex", justifyContent: "center" }}>
+        <div style={{ marginRight: "5rem", marginLeft: "5rem", flexDirection: "column", marginTop: "6rem", display: "flex", justifyContent: "center" }}>
           <div style={{ display: "flex", flex: 1 }}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, alignItems: "space-between", flexDirection:"column" }}>
               {this.renderCartBlades()}

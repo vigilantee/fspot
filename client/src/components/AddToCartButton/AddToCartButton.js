@@ -29,7 +29,7 @@ class AddToCartButton extends React.Component {
           backgroundColor: this.state.hovered?"#4CA82C":"white",
           opacity: this.state.hovered?0.7:1,
         }}
-        onClick={() => this.props.addToCart(this.props.count)}
+        onClick={() => this.props.addToCart(this.props.count==0?1:this.props.count)}
         onMouseEnter={()=>this.setHover()}
         onMouseLeave={()=>this.cancelHover()}
       >
