@@ -1,10 +1,9 @@
 import React from "react";
-import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
 import AddToCartButton from '../AddToCartButton/AddToCartButton';
-
+import ItemIncrementor from '../ItemIncrementor/ItemIncrementor';
 
 const FoodCard = data => {
   const { props, count, plus, minus, updateInputValue, addToCart } = data;
@@ -48,33 +47,12 @@ const FoodCard = data => {
               <b>{props.name}</b>
             </div>
             &#x20b9;{props.price}
-            <div style={{ display: "flex" }}>
-              <p>Qty</p>
-              <button
-                style={{ background: "none", border: "none", outline: "none" }}
-                onClick={() => minus()}
-              >
-                <FiMinusCircle />
-              </button>
-              <input
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: 10,
-                  width: 30,
-                  textAlign: "center"
-                }}
-                value={count!=0?count:1}
-                onChange={evt => updateInputValue(evt.target.value)}
-              />
-              <button
-                style={{ background: "none", border: "none", outline: "none" }}
-                onClick={() => plus()}
-              >
-                <FiPlusCircle />
-              </button>
-            </div>
+            <ItemIncrementor
+            minus={minus}
+            plus={plus}
+            updateInputValue={updateInputValue}
+            count={count}
+            />
             <div>
               <b>{props.details}</b>
             </div>

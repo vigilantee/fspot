@@ -28,7 +28,7 @@ const menuReducer = (state = initialState, action) => {
         case 'UPDATE_ITEM':
             const re = /^[0-9\b]+$/;
             if (action.data === '' || re.test(action.data)) {
-                state.itemsQuantity.splice(action.index, 1, action.data);
+                state.itemsQuantity.splice(action.index, 1, parseInt(action.data));
                 return { ...state, itemsQuantity: state.itemsQuantity };
             }
             return state;

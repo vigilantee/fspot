@@ -1,17 +1,20 @@
 import React from "react";
-import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import { connect } from 'react-redux';
 
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
-import AddToCartButton from '../AddToCartButton/AddToCartButton';
+// import AddToCartButton from '../AddToCartButton/AddToCartButton';
+import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
+import ItemIncrementor from '../ItemIncrementor/ItemIncrementor';
 
 
-const FoodCard = data => {
-    const { cartItem, quantity } = data;
+const CartSummaryCard = data => {
+    const { cartItem, quantity, count, plus,minus } = data;
     const mark = cartItem.type == "veg" ? veg : nonveg;
-    const netPrice = cartItem.price*quantity;
+    const netPrice = cartItem.price * quantity;
+    const i = 0;
     return (
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flex: 1,height:224, marginBottom:20}}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flex: 1, height: 224, marginBottom: 20 }}>
             <div style={{ display: "flex", alignItems: "center" }}>
                 <div>
                     <img src={cartItem.image_url} style={{ width: 170, height: 150 }} />
@@ -19,11 +22,32 @@ const FoodCard = data => {
                 </div>
                 {cartItem.name}
             </div>
-            <div>Qty:{quantity}</div>
+            <div>
+                <ItemIncrementor
+                    count={count}
+                    plus={plus}
+                    minus={minus}
+                    updateInputValue={false}
+                />
+            </div>
             <div>Price/Plate:{cartItem.price}</div>
-            <div>Price: {netPrice}</div>
+            <div>Sub Total: {netPrice}</div>
         </div>
     );
 };
 
-export default FoodCard;
+const mapDispatchToProps = {
+    getMenu: getMenu,
+    incrementQuantity: incrementQuantity,
+    decrementQuantity: decrementQuantity,
+    updateItem: updateItem,
+    addToCart: addToCart
+};
+
+function mapStateToProps(state) {
+    return {
+        menu: state.menu,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartSummaryCard);

@@ -9,15 +9,19 @@ import CartSummaryCard from '../../components/CartSummaryCard/CartSummaryCard';
 class CartSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.props.getMenu();
   }
 
   renderCartBlades() {
     return (
-      this.props.menu.menu.map((elem,i) => {
+      this.props.menu.menu.filter((elem,i)=> this.props.menu.cart[i]==0?0:elem).map((elem,i) => {
         return (
           <CartSummaryCard
             cartItem={elem}
             quantity={this.props.menu.cart[i]}
+            plus={() => this.props.incrementQuantity(i)}
+            minus={() => this.props.decrementQuantity(i)}
+            count={this.props.menu.itemsQuantity[i]}
             key={i}
           />
         );
@@ -31,12 +35,13 @@ class CartSummary extends React.Component {
     return (
       <div>
         <Navbar cart={false} history={this.props.history} />
-        <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
+        <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "column", marginTop: 100, display: "flex", justifyContent: "center" }}>
           <div style={{ display: "flex", flex: 1 }}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, alignItems: "space-between", flexDirection:"column" }}>
               {this.renderCartBlades()}
             </div>
           </div>
+          <div>Total: {this.props.menu.total}</div>
         </div>
       </div>
     );

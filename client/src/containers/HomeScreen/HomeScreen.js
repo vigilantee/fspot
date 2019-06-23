@@ -37,7 +37,6 @@ class HomeScreen extends React.Component {
         <div style={{display:"flex",flex:1}}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}>
               {this.renderCards()}
-              {this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}{this.renderCards()}
             </div>
           </div>
         </div>
