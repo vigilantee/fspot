@@ -1,7 +1,7 @@
 module.exports = {
     apps : [{
       name        : "fspot-api",
-      script      : "./fspot-backend/server/server.js",
+      script      : "./server/server.js",
       watch       : true,
       env: {
         "NODE_ENV": "development",
