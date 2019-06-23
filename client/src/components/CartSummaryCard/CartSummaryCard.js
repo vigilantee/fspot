@@ -14,13 +14,13 @@ const CartSummaryCard = data => {
     const netPrice = cartItem.price * quantity;
     const i = 0;
     return (
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flex: 1, height: 224, marginBottom: 20 }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", marginBottom: 20,boxShadow:"2px 2px 2px 2px #6666",padding:"40px 0px"}}>
+            <div style={{ display: "flex", alignItems: "center",fontSize:24 }}>
                 <div>
                     <img src={cartItem.image_url} style={{ width: 170, height: 150 }} />
                     <img src={mark} style={{ height: 30, width: 30 }} />
                 </div>
-                {cartItem.name}
+                <b>{cartItem.name}</b>
             </div>
             <div>
                 <ItemIncrementor
@@ -30,8 +30,8 @@ const CartSummaryCard = data => {
                     updateInputValue={false}
                 />
             </div>
-            <div>Price/Plate:{cartItem.price}</div>
-            <div>Sub Total: {netPrice}</div>
+            <div style={{fontSize:20}}><b>Price/Plate:{cartItem.price}</b></div>
+            <div style={{fontSize:20}}><b>Sub Total: {netPrice}</b></div>
         </div>
     );
 };

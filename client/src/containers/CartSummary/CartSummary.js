@@ -35,13 +35,13 @@ class CartSummary extends React.Component {
     return (
       <div>
         <Navbar cart={false} history={this.props.history} />
-        <div style={{ marginRight: 150, marginLeft: 150, flexDirection: "column", marginTop: 100, display: "flex", justifyContent: "center" }}>
+        <div style={{ marginRight: 250, marginLeft: 250, flexDirection: "column", marginTop: 100, display: "flex", justifyContent: "center" }}>
           <div style={{ display: "flex", flex: 1 }}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, alignItems: "space-between", flexDirection:"column" }}>
               {this.renderCartBlades()}
             </div>
           </div>
-          <div>Total: {this.props.menu.total}</div>
+          <div style={{fontSize:40,display:"flex",justifyContent:"flex-end"}}><b>Total: {this.props.menu.total}</b></div>
         </div>
       </div>
     );

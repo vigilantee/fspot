@@ -15,8 +15,8 @@ const ItemIncrementor = props => {
             </button>
             {
                 props.updateInputValue == false ?
-                <div>
-                    {count}
+                <div style={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
+                   <b> {count} </b> 
                 </div>:
                 <input
                 style={{
