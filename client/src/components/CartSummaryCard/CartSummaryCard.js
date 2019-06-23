@@ -1,18 +1,14 @@
 import React from "react";
-import { connect } from 'react-redux';
 
 import veg from '../../assets/veg.png';
 import nonveg from '../../assets/nonveg.png';
-// import AddToCartButton from '../AddToCartButton/AddToCartButton';
-import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } from '../../actions';
 import ItemIncrementor from '../ItemIncrementor/ItemIncrementor';
 
 
 const CartSummaryCard = data => {
-    const { cartItem, quantity, count, plus,minus } = data;
+    const { cartItem, quantity, count, plus,minus,addToCart } = data;
     const mark = cartItem.type == "veg" ? veg : nonveg;
     const netPrice = cartItem.price * quantity;
-    const i = 0;
     return (
         <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", marginBottom: 20,boxShadow:"2px 2px 2px 2px #6666",padding:"40px 0px"}}>
             <div style={{ display: "flex", alignItems: "center",fontSize:24 }}>
@@ -27,7 +23,8 @@ const CartSummaryCard = data => {
                     count={count}
                     plus={plus}
                     minus={minus}
-                    updateInputValue={false}
+                    cart
+                    addToCart={(data) => addToCart(data)}
                 />
             </div>
             <div style={{fontSize:20}}><b>Price/Plate:{cartItem.price}</b></div>
@@ -36,18 +33,4 @@ const CartSummaryCard = data => {
     );
 };
 
-const mapDispatchToProps = {
-    getMenu: getMenu,
-    incrementQuantity: incrementQuantity,
-    decrementQuantity: decrementQuantity,
-    updateItem: updateItem,
-    addToCart: addToCart
-};
-
-function mapStateToProps(state) {
-    return {
-        menu: state.menu,
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartSummaryCard);
+export default CartSummaryCard;

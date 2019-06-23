@@ -21,8 +21,9 @@ class CartSummary extends React.Component {
             quantity={this.props.menu.cart[i]}
             plus={() => this.props.incrementQuantity(i)}
             minus={() => this.props.decrementQuantity(i)}
-            count={this.props.menu.itemsQuantity[i]}
+            count={this.props.menu.cart[i]}
             key={i}
+            addToCart={(data)=>this.props.addToCart(data, i)}
           />
         );
       })
