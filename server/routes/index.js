@@ -36,4 +36,19 @@ router.get('/menu',(req,res,next)=>{
     }
 });
 
+router.post('/addtocart',(req,res,next)=>{
+    try{
+        let items = req.body.items;
+        let user_id = req.body.userid;
+        if(req.query.veg)
+            filters += 'and type = "veg" ';
+        else if(req.query.nonveg)
+            filters += 'and type = "non-veg" ';
+        db.executeQuery(`select * from product where ${filters}`, results=>res.json(results));
+    }catch(e){
+        console.log('Error logged....',e);
+        res.sendStatus(500);
+    }
+});
+
 module.exports=router;
