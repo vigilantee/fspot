@@ -36,7 +36,9 @@ const menuReducer = (state = initialState, action) => {
             const reg = /^[0-9\b]+$/;
             if (action.data === '' || reg.test(action.data)) {
                 const totalItems = cart => cart.reduce((a, b) => a + b, 0);
-                const total = cart => cart.reduce((a, b, i) => a + b*state.menu[i].price, 0);
+                const total = cart => cart.reduce((a, b, i) => {
+                    return a + b*state.menu[i].price;
+                }, 0);
                 if (action.data == 0) {
                     state.itemsQuantity.splice(action.data, 1, 1);
                     state.cart.splice(action.index, 1, 1);
@@ -48,7 +50,7 @@ const menuReducer = (state = initialState, action) => {
                     state.cart.splice(action.index, 1, action.data);
                     state.cartCount = totalItems(state.cart.slice());
                     state.total = total(state.cart.slice());
-                    return { ...state, cart: state.cart, cartCount: state.cartCount };
+                    return { ...state, cart: state.cart, cartCount: state.cartCount, total:state.total };
                 }
             }
         default:
