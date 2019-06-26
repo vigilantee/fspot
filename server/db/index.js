@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 const query = 'select * from user';
 
 function querySuccess(data) {
-	console.log("Data recieved is ....... ", data);
+	console.log("Database connected ....... ");
 }
 
 var app = express();
