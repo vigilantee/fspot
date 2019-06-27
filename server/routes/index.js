@@ -12,6 +12,17 @@ router.get('/user_info',(req,res,next)=>{
     }
 });
 
+router.post('/order',(req,res,next)=>{
+    try{
+        const data = req.body;
+        if(!data.user_id||!data.total) throw "User ID or Total is not defined";
+        db.executeQuery(`insert into orders(user_id,total,total_discount,cgst,sgst)values(${data.user_id},${data.total},${data.total_discount?data.total_discount:0},${data.cgst?data.cgst:0},${data.sgst?data.sgst:0})`,results=>res.json({response:"Order successfully placed",order_id:results.insertId}));
+    }catch(e){
+        console.log('Error logged....',e);
+        res.sendStatus(500);
+    }
+});
+
 router.get('/user_info/:uid',(req,res,next)=>{
     try{
 
