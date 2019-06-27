@@ -27,7 +27,7 @@ const FoodCard = data => {
         style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <div>
-          <img src={props.image_url} style={{ height: 300, width: 400 }} />
+          <img src={props.imageUrl} style={{ height: 300, width: 400 }} />
           <div
             style={{
               display: "flex",
