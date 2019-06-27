@@ -34,3 +34,10 @@ export const addToCart = (data, i) => {
     index: i
   }
 }
+
+export const signInSuccess = data => {
+  return {
+    type: 'SIGN_IN_SUCCESS',
+    data: data
+  }
+}

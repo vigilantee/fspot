@@ -5,7 +5,11 @@ const initialState = {
     itemsQuantity: [], //Maintain the transitional Quantity of the cards
     cart: [], //Maintain product id of the products in the cart
     cartCount: 0,
-    total: 0
+    total: 0,
+    googleId: "",
+    profilePic: "",
+    firstName:"",
+    email:""
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -45,6 +49,13 @@ const menuReducer = (state = initialState, action) => {
                 state.total = total(state.cart.slice());
                 return { ...state, cart: state.cart, cartCount: state.cartCount, total: state.total };
             }
+            return state;
+        case 'SIGN_IN_SUCCESS':
+            console.log("data recieved at reducer is .....", action.data);
+            state.googleId=action.data.profileObj.googleId;
+            state.email=action.data.profileObj.email;
+            state.profilePic=action.data.profileObj.imageUrl;
+            state.firstName=action.data.profileObj.givenName;
             return state;
         default:
             return state;
