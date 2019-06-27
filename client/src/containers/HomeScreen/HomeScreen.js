@@ -29,7 +29,7 @@ class HomeScreen extends React.Component {
 
   render() {
     if (!this.props.menu.loaded)
-      return <div>Loading...</div>;
+      return <div><Navbar history={this.props.history}/>Loading...</div>;
     return (
       <div>
         <Navbar history={this.props.history}/>
