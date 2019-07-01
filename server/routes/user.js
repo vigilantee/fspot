@@ -1,16 +1,7 @@
 const express=require('express');
 const db=require('../db/index.js');
 const router=express.Router();
-
-router.get('/:uid',(req,res,next)=>{
-    try{
-
-        db.executeQuery(`select id, username, profilePic from user where id=${req.params.uid}`, results=>res.json(results[0]));
-    }catch(e){
-        console.log('Error logged....',e);
-        res.sendStatus(500);
-    }
-});
+var emaildata="manish";
 
 router.post('/addNew',(req,res,next)=>{
     try{
@@ -34,8 +25,20 @@ router.post('/addNew',(req,res,next)=>{
         const defaultPassword="root";
         const values = `("${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}")`;
         const query=`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic) VALUES ${values}`;
-        // res.json(query);
-        db.executeQuery(query, results=>res.json(results));
+        db.executeQuery(`select email from user where email="${email}"`, function abc(results){
+             var emaildata=results;
+            return [res.json(results),console.log(emaildata)];
+            if(emaildata==[]){
+               // res.json(query);
+                db.executeQuery(query, results=>[res.json(results),console.log(results)]);
+            }else{
+                console.log("user is already exists");
+            }
+         });
+         console.log(emaildata)
+           
+         res.json(query);
+         db.executeQuery(query, results=>res.json(results));
     }catch(e){
         console.log('Error logged....',e);
         res.sendStatus(500);
@@ -56,6 +59,18 @@ router.post('/update',(req,res,next)=>{
         res.sendStatus(500);
     }
 });
+
+
+router.get('/test',(req,res,next)=>{
+    try{
+
+        db.executeQuery(`select id, username, profilePic from user where email="abc@gmail.com"`, results=>res.json(results));
+    }catch(e){
+        console.log('Error logged....',e);
+        res.sendStatus(500);
+    }
+});
+
 
 
 module.exports=router;
