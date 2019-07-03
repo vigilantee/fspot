@@ -9,7 +9,9 @@ const initialState = {
     googleId: "",
     profilePic: "",
     firstName:"",
-    email:""
+    email:"",
+    name:"",
+    surname:""
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -51,15 +53,16 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
-            console.log("data recieved at reducer is .....", action.data);
+            console.log("data recieved at reducer is .....", JSON.stringify(action.data.profileObj),JSON.stringify(action.data.w3));
             state.googleId=action.data.profileObj.googleId;
             state.email=action.data.profileObj.email;
             state.profilePic=action.data.profileObj.imageUrl;
             state.firstName=action.data.profileObj.givenName;
+            state.name=action.data.profileObj.name;
+            state.surname=action.data.profileObj.familyName;
             return state;
         default:
             return state;
     }
 };
-
 export default menuReducer;

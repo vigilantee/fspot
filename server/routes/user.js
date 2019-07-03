@@ -23,22 +23,12 @@ router.post('/addNew',(req,res,next)=>{
 
 
         const defaultPassword="root";
-        const values = `("${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}")`;
-        const query=`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic) VALUES ${values}`;
-        db.executeQuery(`select email from user where email="${email}"`, function abc(results){
-             var emaildata=results;
-            return [res.json(results),console.log(emaildata)];
-            if(emaildata==[]){
-               // res.json(query);
-                db.executeQuery(query, results=>[res.json(results),console.log(results)]);
-            }else{
-                console.log("user is already exists");
-            }
-         });
-         console.log(emaildata)
-           
-         res.json(query);
-         db.executeQuery(query, results=>res.json(results));
+        //const values = `"${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}"`;
+        //const query=`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic) VALUES ${values}`;
+        // const query=`INSERT INTO user(username, email, password, name, surname, firstName, googleId, profilePic) SELECT "${values}" FROM dual WHERE NOT EXISTS(SELECT "${email}" FROM user WHERE email="${email}")`;
+        //db.executeQuery(query, results=>[res.json(results),console.log(results)]); 
+        db.executeQuery(`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic)SELECT "${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}" FROM dual WHERE NOT EXISTS (SELECT "${email}" FROM user WHERE email="${email}")`,results=>res.json(results));
+
     }catch(e){
         console.log('Error logged....',e);
         res.sendStatus(500);
