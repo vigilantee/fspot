@@ -13,6 +13,7 @@ router.post('/addNew',(req,res,next)=>{
         const firstName=data.firstName;
         const googleId=data.googleId;
         const profilePic=data.profilePic;
+        console.log("data is .....", data);
         if(!data||!username||!email||!name||!surname||!firstName||!googleId||!profilePic)
         {
             res.status(422);
