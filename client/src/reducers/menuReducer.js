@@ -56,13 +56,24 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
-            console.log("data recieved at reducer is .....", JSON.stringify(action.data.profileObj),JSON.stringify(action.data.w3));
             state.googleId=action.data.profileObj.googleId;
             state.email=action.data.profileObj.email;
             state.profilePic=action.data.profileObj.imageUrl;
             state.firstName=action.data.profileObj.givenName;
             state.name=action.data.profileObj.name;
             state.surname=action.data.profileObj.familyName;
+            const postData = {
+                googleId: state.googleId,
+                email: state.email,
+                profilePic: state.profilePic,
+                firstName: state.firstName,
+                name: state.name,
+                surname: state.ssurname
+            };
+            const data = fetch(SIGN_IN_SUCCESS, {
+                method: 'POST',
+                body: JSON.stringify(postData)
+            }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
             return state;
         default:
             return state;
