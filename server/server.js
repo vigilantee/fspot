@@ -1,4 +1,4 @@
-const express=require("express");
+import express from 'express'
 const api_v1_router=require('./routes');
 const user_api=require('./routes/user');
 const app=express();
