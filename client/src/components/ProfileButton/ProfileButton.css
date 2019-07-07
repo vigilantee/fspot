@@ -1,0 +1,12 @@
+.profilepic {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10rem;
+}
