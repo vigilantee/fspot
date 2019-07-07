@@ -1,3 +1,6 @@
+import { SIGN_IN_SUCCESS } from '../ApiConstants';
+
+
 const initialState = {
     loaded: false,
     loading: false,
@@ -8,8 +11,8 @@ const initialState = {
     total: 0,
     googleId: "",
     profilePic: "",
-    firstName:"",
-    email:""
+    firstName: "",
+    email: ""
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -52,10 +55,15 @@ const menuReducer = (state = initialState, action) => {
             return state;
         case 'SIGN_IN_SUCCESS':
             console.log("data recieved at reducer is .....", action.data);
-            state.googleId=action.data.profileObj.googleId;
-            state.email=action.data.profileObj.email;
-            state.profilePic=action.data.profileObj.imageUrl;
-            state.firstName=action.data.profileObj.givenName;
+
+            const data = fetch(SIGN_IN_SUCCESS, {
+                method: 'POST',
+                body: JSON.stringify(action.data)
+            }).then(response => response.json()).then(response=>console.log("response is ......", response));
+            state.googleId = action.data.profileObj.googleId;
+            state.email = action.data.profileObj.email;
+            state.profilePic = action.data.profileObj.imageUrl;
+            state.firstName = action.data.profileObj.givenName;
             return state;
         default:
             return state;

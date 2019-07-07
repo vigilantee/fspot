@@ -7,40 +7,26 @@ function* fetchMenu() {
   yield put({ type: "MENU_RECEIVED", data: data, });
 }
 
-function* incrementItem() {
-  yield put({ type: "INCREMENT_ITEM", data: data, })
-}
-
-function* addToCart() {
-  yield put({ type: "ADD_TO_CART",data: data, })
-}
-
-
-function* decrementItem() {
-  yield put({ type: "DECREMENT_ITEM",data: data, })
-}
+// function* signInSuccess() {
+//   console.log("data is ...", data);
+//   const data = yield fetch(SIGN_IN_SUCCESS)
+//   fetch(SIGN_IN_SUCCESS,{
+//         method: 'POST',
+//         headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => response.json());
+// }
 
 function* actionWatcher() {
   yield takeLatest('GET_MENU', fetchMenu)
 }
 
-function* incrementActionWatcher() {
-  yield takeLatest('INCREMENT_ITEM', incrementItem);
-}
-
-function* decrementActionWatcher() {
-  yield takeLatest('DECREMENT_ITEM', decrementItem);
-}
-
-function* addToCartWatcher() {
-  yield takeLatest('ADD_TO_CART', addToCart);
-}
-
 export default function* rootSaga() {
   yield all([
-    actionWatcher(),
-    incrementActionWatcher(),
-    decrementActionWatcher(),
-    addToCartWatcher()
+    actionWatcher()
   ]);
 }
