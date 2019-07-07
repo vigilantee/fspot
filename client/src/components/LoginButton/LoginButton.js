@@ -18,7 +18,7 @@ class LoginButton extends React.Component {
   }
 
   render() {
-    console.log("Login button is having props.....", this.props.menu);
+    console.log("Login button is having props.....", this.props);
     if (this.props.email)
       return (
         <ProfileButton
