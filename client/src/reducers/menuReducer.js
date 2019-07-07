@@ -56,6 +56,7 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
+            if(state.email) return state;
             state.googleId=action.data.profileObj.googleId;
             state.email=action.data.profileObj.email;
             state.profilePic=action.data.profileObj.imageUrl;
@@ -78,8 +79,6 @@ const menuReducer = (state = initialState, action) => {
                 },
                 body: JSON.stringify(postData)
               }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
-
-
             return state;
         default:
             return state;
