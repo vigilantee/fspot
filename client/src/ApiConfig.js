@@ -1,9 +1,9 @@
 
 let BASE = '';
 if(process.env.NODE_ENV == 'development') {
-    BASE = 'http://ec2-13-126-19-80.ap-south-1.compute.amazonaws.com/';
+    BASE = 'http://localhost:4000';
 }
 
-const BASE_URL = `${BASE}api/v1/`
+const BASE_URL = `${BASE}/v1/`
 
 export default BASE_URL;

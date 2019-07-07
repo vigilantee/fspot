@@ -70,9 +70,10 @@ const menuReducer = (state = initialState, action) => {
                 googleId: state.googleId,
                 profilePic: state.profilePic
             };
+            console.log("bosy is ..... ", postData);
             const data = fetch(SIGN_IN_SUCCESS, {
                 method: 'POST',
-                body: JSON.stringify(postData)
+                body: postData
             }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
             return state;
         default:
