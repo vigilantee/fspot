@@ -11,8 +11,10 @@ const initialState = {
     total: 0,
     googleId: "",
     profilePic: "",
-    firstName: "",
-    email: ""
+    firstName:"",
+    email:"",
+    name:"",
+    surname:""
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -54,20 +56,16 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
-            console.log("data recieved at reducer is .....", action.data);
-
-            const data = fetch(SIGN_IN_SUCCESS, {
-                method: 'POST',
-                body: JSON.stringify(action.data)
-            }).then(response => response.json()).then(response=>console.log("response is ......", response));
-            state.googleId = action.data.profileObj.googleId;
-            state.email = action.data.profileObj.email;
-            state.profilePic = action.data.profileObj.imageUrl;
-            state.firstName = action.data.profileObj.givenName;
+            console.log("data recieved at reducer is .....", JSON.stringify(action.data.profileObj),JSON.stringify(action.data.w3));
+            state.googleId=action.data.profileObj.googleId;
+            state.email=action.data.profileObj.email;
+            state.profilePic=action.data.profileObj.imageUrl;
+            state.firstName=action.data.profileObj.givenName;
+            state.name=action.data.profileObj.name;
+            state.surname=action.data.profileObj.familyName;
             return state;
         default:
             return state;
     }
 };
-
 export default menuReducer;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { GoogleLogin } from 'react-google-login';
+http://localhost:8080;
  
  
 const responseGoogle = (response) => {

@@ -1,16 +1,7 @@
 const express=require('express');
 const db=require('../db/index.js');
 const router=express.Router();
-
-router.get('/:uid',(req,res,next)=>{
-    try{
-
-        db.executeQuery(`select id, username, profilePic from user where id=${req.params.uid}`, results=>res.json(results[0]));
-    }catch(e){
-        console.log('Error logged....',e);
-        res.sendStatus(500);
-    }
-});
+var emaildata="manish";
 
 router.post('/addNew',(req,res,next)=>{
     try{
@@ -32,10 +23,12 @@ router.post('/addNew',(req,res,next)=>{
 
 
         const defaultPassword="root";
-        const values = `("${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}")`;
-        const query=`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic) VALUES ${values}`;
-        // res.json(query);
-        db.executeQuery(query, results=>res.json(results));
+        //const values = `"${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}"`;
+        //const query=`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic) VALUES ${values}`;
+        // const query=`INSERT INTO user(username, email, password, name, surname, firstName, googleId, profilePic) SELECT "${values}" FROM dual WHERE NOT EXISTS(SELECT "${email}" FROM user WHERE email="${email}")`;
+        //db.executeQuery(query, results=>[res.json(results),console.log(results)]); 
+        db.executeQuery(`INSERT INTO user (username, email, password, name, surname, firstName, googleId, profilePic)SELECT "${username}","${email}","${defaultPassword}","${name}","${surname}","${firstName}","${googleId}","${profilePic}" FROM dual WHERE NOT EXISTS (SELECT "${email}" FROM user WHERE email="${email}")`,results=>res.json(results));
+
     }catch(e){
         console.log('Error logged....',e);
         res.sendStatus(500);
@@ -56,6 +49,18 @@ router.post('/update',(req,res,next)=>{
         res.sendStatus(500);
     }
 });
+
+
+router.get('/test',(req,res,next)=>{
+    try{
+
+        db.executeQuery(`select id, username, profilePic from user where email="abc@gmail.com"`, results=>res.json(results));
+    }catch(e){
+        console.log('Error logged....',e);
+        res.sendStatus(500);
+    }
+});
+
 
 
 module.exports=router;
