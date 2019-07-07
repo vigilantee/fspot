@@ -8,7 +8,6 @@ import ProfileButton from "../ProfileButton/ProfileButton"
 class LoginButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
     this.responseGoogle = (response) => {
       console.log("Google Response is....", response);
       this.props.signInSuccess(response);
@@ -19,11 +18,12 @@ class LoginButton extends React.Component {
   }
 
   render() {
-    if (this.state.email)
+    console.log("Login button is having props.....", this.props.menu);
+    if (this.props.email)
       return (
         <ProfileButton
-          profilePic={this.state.profilePic}
-          name={this.state.name}
+          profilePic={this.props.profilePic}
+          name={this.props.name}
         />
       );
     return (
@@ -37,6 +37,14 @@ class LoginButton extends React.Component {
     );
   }
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     email: state.menu.email,
+//     profilePic: state.menu.profilePic,
+//     name: state.menu.name
+//   }
+// }
 
 function mapStateToProps(state) {
   return {
