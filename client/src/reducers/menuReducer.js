@@ -1,6 +1,6 @@
 import { SIGN_IN_SUCCESS } from '../ApiConstants';
 
-
+// TODO Remove all mutations
 const initialState = {
     loaded: false,
     loading: false,
@@ -11,10 +11,10 @@ const initialState = {
     total: 0,
     googleId: "",
     profilePic: "",
-    firstName:"",
-    email:"",
-    name:"",
-    surname:""
+    firstName: "",
+    email: "",
+    name: "",
+    surname: ""
 }
 
 const menuReducer = (state = initialState, action) => {
@@ -56,30 +56,31 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
-            if(state.email) return state;
-            state.googleId=action.data.profileObj.googleId;
-            state.email=action.data.profileObj.email;
-            state.profilePic=action.data.profileObj.imageUrl;
-            state.firstName=action.data.profileObj.givenName;
-            state.name=action.data.profileObj.name;
-            state.surname=action.data.profileObj.familyName;
+            if (state.email) return state;
+
+            let googleId = action.data.profileObj.googleId;
+            let email = action.data.profileObj.email;
+            let profilePic = action.data.profileObj.imageUrl;
+            let firstName = action.data.profileObj.givenName;
+            let name = action.data.profileObj.name;
+            let surname = action.data.profileObj.familyName;
             const postData = {
-                email: state.email,
-                name: state.name,
-                surname: state.surname,
-                firstName: state.firstName,
-                googleId: state.googleId,
-                profilePic: state.profilePic
+                email: email,
+                name: name,
+                surname: surname,
+                firstName: firstName,
+                googleId: googleId,
+                profilePic: profilePic
             };
             const postQuery = fetch(SIGN_IN_SUCCESS, {
                 method: 'POST',
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(postData)
-              }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
-            return state;
+            }).then(response => response.json()).then(response => console.log("response is post backend log from backend......", response));
+            return {...state, email: email, name: name, surname: surname, firstName: firstName, googleId: googleId, profilePic: profilePic};
         default:
             return state;
     }
