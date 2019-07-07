@@ -65,7 +65,7 @@ const menuReducer = (state = initialState, action) => {
             const postData = {
                 email: state.email,
                 name: state.name,
-                surname: state.ssurname,
+                surname: state.surname,
                 firstName: state.firstName,
                 googleId: state.googleId,
                 profilePic: state.profilePic
