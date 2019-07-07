@@ -63,17 +63,23 @@ const menuReducer = (state = initialState, action) => {
             state.name=action.data.profileObj.name;
             state.surname=action.data.profileObj.familyName;
             const postData = {
-                googleId: state.googleId,
                 email: state.email,
-                profilePic: state.profilePic,
-                firstName: state.firstName,
                 name: state.name,
-                surname: state.ssurname
+                surname: state.surname,
+                firstName: state.firstName,
+                googleId: state.googleId,
+                profilePic: state.profilePic
             };
-            const data = fetch(SIGN_IN_SUCCESS, {
+            const postQuery = fetch(SIGN_IN_SUCCESS, {
                 method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(postData)
-            }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
+              }).then(response => response.json()).then(response=>console.log("response is post backend log from backend......", response));
+
+
             return state;
         default:
             return state;
