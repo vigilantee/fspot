@@ -63,12 +63,12 @@ const menuReducer = (state = initialState, action) => {
             state.name=action.data.profileObj.name;
             state.surname=action.data.profileObj.familyName;
             const postData = {
-                googleId: state.googleId,
                 email: state.email,
-                profilePic: state.profilePic,
-                firstName: state.firstName,
                 name: state.name,
-                surname: state.ssurname
+                surname: state.ssurname,
+                firstName: state.firstName,
+                googleId: state.googleId,
+                profilePic: state.profilePic
             };
             const data = fetch(SIGN_IN_SUCCESS, {
                 method: 'POST',

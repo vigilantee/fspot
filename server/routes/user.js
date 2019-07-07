@@ -6,7 +6,7 @@ var emaildata="manish";
 router.post('/addNew',(req,res,next)=>{
     try{
         const data = req.body;
-        const username=data.username;
+        const username=data.email;
         const email=data.email;
         const name=data.name;
         const surname=data.surname;
@@ -16,7 +16,7 @@ router.post('/addNew',(req,res,next)=>{
         if(!data||!username||!email||!name||!surname||!firstName||!googleId||!profilePic)
         {
             res.status(422);
-            res.json({response:"Missing Parameters.\n1.username\n2.email\n3.name\n4.surname\n5.firstName\n6.googleId\n7.profilePic"});
+            res.json({response:"Missing Parameters.\n1.email\n2.name\n3.surname\n4.firstName\n5.googleId\n6.profilePic"});
             return res;
         }
 
