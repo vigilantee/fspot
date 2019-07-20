@@ -11,7 +11,7 @@ class Cocodevs extends React.Component {
   componentDidMount() {
     fetch('http://www.fspot.in/api/v1/cocodevs')
       .then(response => response.json())
-      .then(data => this.setState({ data },()=>console.log("data is ....", this.state.data)));
+      .then(data => this.setState({ data }, () => console.log("data is ....", this.state.data)));
   }
 
   renderCartBlades() {
@@ -21,16 +21,16 @@ class Cocodevs extends React.Component {
         return (
           <div>
             {elem.name}
-            <br/>
-            {elem.url}
+            <br />
+            <br />
+            <a href={elem.url} target='_blank'>
+              {elem.description}
+            </a>
             <br/>
             {elem.title}
-            <br/>
-            {elem.description}
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
           </div>
         );
       })
