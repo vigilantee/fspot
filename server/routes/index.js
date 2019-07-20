@@ -42,4 +42,26 @@ router.post('/addtocart',(req,res,next)=>{
     }
 });
 
+router.get('/cocodevs',(req,res,next)=>{
+    try{
+        db.executeQuery(`select * from cocodevs`,results=>res.json(results));
+    }catch(e){
+        console.log('Error logged......',e);
+        res.sendStatus(5000);
+    }
+});
+
+router.post('/cocodevs/post',(req,res,next)=>{
+    try{
+        const data = req.body;
+        const url=data.url;
+        const name=data.name;
+        db.executeQuery(`INSERT INTO cocodevs (url, name) VALUES ("${url}","${name}")`,results=>res.json(results));
+
+    }catch(e){
+        console.log('Error logged......',e);
+        res.sendStatus(5000);
+    }
+})
+
 module.exports=router;
