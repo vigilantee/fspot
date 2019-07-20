@@ -56,7 +56,9 @@ router.post('/cocodevs/post',(req,res,next)=>{
         const data = req.body;
         const url=data.url;
         const name=data.name;
-        db.executeQuery(`INSERT INTO cocodevs (url, name) VALUES ("${url}","${name}")`,results=>res.json(results));
+        const title=data.title;
+        const description=data.description;
+        db.executeQuery(`INSERT INTO cocodevs (url, name,title,description) VALUES ("${url}","${name}","${title}","${description}")`,results=>res.json(results));
 
     }catch(e){
         console.log('Error logged......',e);
