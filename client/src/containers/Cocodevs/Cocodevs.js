@@ -24,6 +24,10 @@ class Cocodevs extends React.Component {
             <br/>
             {elem.url}
             <br/>
+            {elem.title}
+            <br/>
+            {elem.description}
+            <br/>
             <br/>
             <br/>
             <br/>
