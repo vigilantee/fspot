@@ -44,7 +44,7 @@ router.post('/addtocart',(req,res,next)=>{
 
 router.get('/cocodevs',(req,res,next)=>{
     try{
-        db.executeQuery(`select * from cocodevs`,results=>res.json(results));
+        db.executeQuery(`select * from cocodevs order by id desc`,results=>res.json(results));
     }catch(e){
         console.log('Error logged......',e);
         res.sendStatus(5000);
