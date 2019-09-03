@@ -6,13 +6,8 @@ var emaildata="manish";
 router.post('/addNew',(req,res,next)=>{
     try{
         const data = req.body;
-        const username=data.email;
-        const email=data.email;
-        const name=data.name;
-        const surname=data.surname;
-        const firstName=data.firstName;
-        const googleId=data.googleId;
-        const profilePic=data.profilePic;
+        const { email, name, surname, firstName, googleId, profilePic } = data;
+        const username=email;
         if(!data||!username||!email||!name||!surname||!firstName||!googleId||!profilePic)
         {
             res.status(422);
