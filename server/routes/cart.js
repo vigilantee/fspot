@@ -8,11 +8,11 @@ router.post('/addToCart', (req, res, next) => {
         const data = req.body;
         const { productId, quantity, userId } = data;
         // Extract product details
-        const q1 = `SELECT price, discount from product where id=${productId}`;
+        const q1 = `SELECT name, imageUrl, type, price, discount from product where id=${productId}`;
         db.executeQuery(q1, results => {
             const data = results[0];
             // Got the price and discount
-            const { price, discount } = data;
+            const { name, imageUrl, type, price, discount } = data;
 
             // calculate discount and total
             const totalDiscount = discount * quantity;
@@ -40,7 +40,7 @@ router.post('/addToCart', (req, res, next) => {
                 }
                 else {
                     // make row
-                    let q3 = `INSERT into cart_detail(userId, productId, price, quantity, subtotal, discount, total) values( ${userId}, ${productId}, ${price}, ${quantity}, ${subtotal}, ${totalDiscount}, ${total})`;
+                    let q3 = `INSERT into cart_detail(userId, productId, name, type, imageUrl, price, quantity, subtotal, discount, total) values( ${userId}, ${productId}, "${name}", "${type}", "${imageUrl}", ${price}, ${quantity}, ${subtotal}, ${totalDiscount}, ${total})`;
                     db.executeQuery(q3, result => res.json({ result }));
                     return res;
                 }
@@ -54,5 +54,17 @@ router.post('/addToCart', (req, res, next) => {
     }
 });
 
+//to fetch the details of cart items
+router.get('/details/:uid', (req, res, next) => {
+    try {
+        if (!req.params.uid) throw "uid";
+        const query = `select * from cart_detail where userId="${req.params.uid}"`;
+        db.executeQuery(query, results => res.json(results));
+        return res;
+    } catch (e) {
+        console.log('Error logged....', e);
+        res.sendStatus(500);
+    }
+});
 
 module.exports = router;
