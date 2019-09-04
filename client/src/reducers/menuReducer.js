@@ -56,6 +56,7 @@ const menuReducer = (state = initialState, action) => {
             }
             return state;
         case 'SIGN_IN_SUCCESS':
+
             if (state.email) return state;
 
             let googleId = action.data.profileObj.googleId;
@@ -83,6 +84,16 @@ const menuReducer = (state = initialState, action) => {
             return {...state, email: email, name: name, surname: surname, firstName: firstName, googleId: googleId, profilePic: profilePic};
         default:
             return state;
+        
+        case 'LOGOUT_SUCCESS':
+            return {
+                ...state, 
+                email: '',
+                profilePic : '',
+                firstName : '',
+                name :'',
+                surname : ''
+            };
     }
 };
 export default menuReducer;

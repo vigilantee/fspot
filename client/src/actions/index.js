@@ -41,3 +41,9 @@ export const signInSuccess = data => {
     data: data
   }
 }
+
+export const LogoutAction=()=>{
+  return {
+    type: 'LOGOUT_SUCCESS'
+  }
+}
