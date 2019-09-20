@@ -10,7 +10,7 @@ import NavBoot from "../../components/NavBar/NavBoot";
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.props.getMenu();
+    // this.props.getMenu();
   }
 
   renderCards() {
@@ -29,8 +29,8 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    if (!this.props.menu.loaded)
-      return <div><Navbar history={this.props.history} />Loading...</div>;
+    // if (!this.props.menu.loaded)
+    //   return <div><Navbar history={this.props.history} />Loading...</div>;
     return (
 
       <div>
