@@ -7,11 +7,6 @@ const app=express();
 
 const APP_PORT = 4000;
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-})
 app.use(express.json());
 app.use('/v1/user',user_api);
 app.use('/v1/cart',cart_api);
