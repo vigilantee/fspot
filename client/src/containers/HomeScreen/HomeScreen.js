@@ -5,6 +5,7 @@ import { getMenu, incrementQuantity, decrementQuantity, updateItem, addToCart } 
 import Card from '../../components/FoodCard/FoodCard';
 import Navbar from "../../components/NavBar/NavBar";
 
+import NavBoot from "../../components/NavBar/NavBoot";
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -29,18 +30,28 @@ class HomeScreen extends React.Component {
 
   render() {
     if (!this.props.menu.loaded)
-      return <div><Navbar history={this.props.history}/>Loading...</div>;
+      return <div><Navbar history={this.props.history} />Loading...</div>;
     return (
+
       <div>
-        <Navbar history={this.props.history}/>
-        <div style={{ flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
-        <div style={{display:"flex",flex:1}}>
+
+  
+      
+        <Navbar history={this.props.history} />
+        <div style={{height:80}}/>
+        <NavBoot/>
+        {/* <div style={{ flexDirection: "row", marginTop: 100, display: "flex", alignItems: "center" }}>
+          <div style={{ display: "flex", flex: 1 }}>
             <div style={{ display: "flex", flexWrap: "wrap", flex: 1, justifyContent: "center" }}>
               {this.renderCards()}
             </div>
           </div>
-        </div>
+        </div> */}
+
+        
+
       </div>
+       
     );
   }
 }

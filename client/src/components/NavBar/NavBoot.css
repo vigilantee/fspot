@@ -1,0 +1,38 @@
+.carousel {
+    box-sizing: border-box;
+    
+   
+}
+
+@media only screen and (max-width: 320px) {
+    /* styles for narrow screens */
+
+}
+
+.side-carousel{
+    float: right;
+    width: 20px;
+}
+
+.menu{
+    z-index: 1;
+    text-align: center !important;
+    left: 46% !important;
+    font-size: 30px !important;
+    opacity: 0.8 !important;
+    width: 98% !important;
+    background-color: black !important;
+    
+}
+
+
+
+
+ul{
+    list-style-type: none !important;
+}
+
+.carousel-image{
+    max-width: 100%;
+    height: auto;
+}

@@ -12,7 +12,8 @@ import { logger } from 'redux-logger';
 import rootReducer from './reducers';
 import App from './containers/App';
 import rootSaga from './sagas';
-import omit from 'lodash/omit'
+import omit from 'lodash/omit';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 const blacklistPaths = ['menu.loaded','menu.menu'];
 
