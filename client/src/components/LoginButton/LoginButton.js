@@ -13,7 +13,7 @@ class LoginButton extends React.Component {
       this.props.signInSuccess(response);
     }
     this.failedSignin = (error) => {
-      console.log("Error occured")
+      console.log("Error occured", e)
     }
   }
 
