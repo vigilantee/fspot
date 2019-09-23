@@ -89,7 +89,6 @@ router.post('/test/branch', (req, res, next) => {
                             // TODO Command to run pm2
                             // execSync('npm start', { encoding: 'utf-8' });
                             res.json({ "success": true, "message": "The branch changed successfully" });
-                            res.sendStatus(200);
                         })
                     } catch(e) {
                         return errorBranchChange(e);
