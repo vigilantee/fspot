@@ -89,13 +89,11 @@ router.post('/test/branch', (req, res, next) => {
                 if (changeExist)
                     return res.status(405).json({ "error": true, "message": "Please commit your changes or stash them" });
                 const simpleGit = require('simple-git')('./');
-                simpleGit.fetch(branch, () => {
+                simpleGit.fetch(branch).checkout(branch, () => {
                     try {
-                        simpleGit.checkout(branch, () => {
-                            // TODO Command to run pm2
-                            executeCommand('cd .. && cd client && npm i && npm run build');
-                            res.json({ "success": true, "message": "The branch changed successfully" });
-                        })
+                        // TODO Command to run pm2
+                        executeCommand('cd .. && cd client && npm i && npm run build');
+                        res.json({ "success": true, "message": "The branch changed successfully" });
                     } catch (e) {
                         throw e;
                     }
