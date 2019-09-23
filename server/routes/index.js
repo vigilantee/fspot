@@ -69,9 +69,7 @@ router.post('/cocodevs/post', (req, res, next) => {
 const errorBranchChange = (e) => {
     // Todo Remove Files To Write in case of failure
     console.log("Failed To change Brnach Retry... ", e);
-    res.json({ "error": true, "message": "The branch couldn't be changed" });
-    res.sendStatus(500);
-    return false;
+    return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
 }
 
 router.post('/test/branch', (req, res, next) => {
