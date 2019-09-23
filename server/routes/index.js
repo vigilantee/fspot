@@ -72,11 +72,16 @@ const errorBranchChange = (e) => {
     return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
 }
 
+
+const executeCommand = (command) => {
+    const execSync = require('child_process').execSync;
+    return execSync(command, { encoding: 'utf-8' });
+}
+
 router.post('/test/branch', (req, res, next) => {
     try {
         const data = req.body;
         const branch = data.branch;
-        const execSync = require('child_process').execSync;
         const command = (branch = `master`) => {
             try {
                 const simpleGit = require('simple-git')('./');
@@ -84,10 +89,10 @@ router.post('/test/branch', (req, res, next) => {
                     try {
                         simpleGit.checkout(branch, () => {
                             // TODO Command to run pm2
-                            // execSync('npm start', { encoding: 'utf-8' });
+                            executeCommand('cd .. && cd client && npm i && npm run build');
                             res.json({ "success": true, "message": "The branch changed successfully" });
                         })
-                    } catch(e) {
+                    } catch (e) {
                         return errorBranchChange(e);
                     }
                 })
