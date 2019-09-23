@@ -66,9 +66,9 @@ router.post('/cocodevs/post', (req, res, next) => {
     }
 })
 
-const errorBranchChange = (e) => {
+const errorBranchChange = (e, res) => {
     // Todo Remove Files To Write in case of failure
-    console.log("Failed To change Brnach Retry... ", e);
+    // console.log("Failed To change Branch Retry... ", e);
     return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
 }
 
@@ -85,7 +85,7 @@ router.post('/test/branch', (req, res, next) => {
         const command = (branch = `master`) => {
             try {
                 // check if there is any change or not
-                let changeExist = executeCommand('git diff --exit-code && git diff --cached --exit-code');
+                let changeExist = executeCommand('git diff && git diff --cached');
                 if (changeExist)
                     return res.status(405).json({ "error": true, "message": "Please commit your changes or stash them" });
                 const simpleGit = require('simple-git')('./');
@@ -97,17 +97,16 @@ router.post('/test/branch', (req, res, next) => {
                             res.json({ "success": true, "message": "The branch changed successfully" });
                         })
                     } catch (e) {
-                        return errorBranchChange(e);
+                        throw e;
                     }
                 })
-                return true;
             } catch (e) {
-                return errorBranchChange(e);
+                throw e;
             }
         }
         command(branch);
     } catch (e) {
-        return errorBranchChange(e);
+        return errorBranchChange(e, res);
     }
 })
 
