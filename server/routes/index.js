@@ -66,12 +66,6 @@ router.post('/cocodevs/post', (req, res, next) => {
     }
 })
 
-const errorBranchChange = (e, res) => {
-    // Todo Remove Files To Write in case of failure
-    // console.log("Failed To change Branch Retry... ", e);
-    return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
-}
-
 
 const executeCommand = (command) => {
     const execSync = require('child_process').execSync;
@@ -104,7 +98,9 @@ router.post('/test/branch', (req, res, next) => {
         }
         command(branch);
     } catch (e) {
-        return errorBranchChange(e, res);
+        // Todo Remove Files To Write in case of failure
+        // console.log("Failed To change Branch Retry... ", e);
+        return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
     }
 })
 
