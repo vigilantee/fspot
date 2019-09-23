@@ -47,7 +47,7 @@ router.get('/cocodevs', (req, res, next) => {
         db.executeQuery(`select * from cocodevs order by id desc`, results => res.json(results));
     } catch (e) {
         console.log('Error logged......', e);
-        res.sendStatus(5000);
+        res.sendStatus(500);
     }
 });
 
@@ -62,7 +62,39 @@ router.post('/cocodevs/post', (req, res, next) => {
 
     } catch (e) {
         console.log('Error logged......', e);
-        res.sendStatus(5000);
+        res.sendStatus(500);
+    }
+})
+
+router.post('/test/branch', (req, res, next) => {
+    try {
+        const data = req.body;
+        const branch = data.branch;
+        const execSync = require('child_process').execSync;
+        const command = (cmd = ` `) => {
+            try {
+                execSync(cmd, { encoding: 'utf-8' });
+            } catch (e) {
+                // Todo Remove Files To Write in case of failure
+                console.log("Failed To change Retry... ", e);
+                res.sendStatus(500);
+                return false;
+            }
+            res.sendStatus(200);
+            return true;
+        }
+        command(branch);
+
+        const simpleGit = require('simple-git')('./');
+        simpleGit.checkout('local-env', ()=>{
+            console.log("aaya origin me....");
+        })
+        console.log("branch is .....", branch);
+        res.sendStatus(200);
+
+    } catch (e) {
+        console.log('Error logged......', e);
+        res.sendStatus(500);
     }
 })
 
