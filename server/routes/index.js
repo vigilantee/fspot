@@ -66,6 +66,14 @@ router.post('/cocodevs/post', (req, res, next) => {
     }
 })
 
+const errorBranchChange = (e) => {
+    // Todo Remove Files To Write in case of failure
+    console.log("Failed To change Brnach Retry... ", e);
+    res.json({ "error": true, "message": "The branch couldn't be changed" });
+    res.sendStatus(500);
+    return false;
+}
+
 router.post('/test/branch', (req, res, next) => {
     try {
         const data = req.body;
@@ -76,26 +84,25 @@ router.post('/test/branch', (req, res, next) => {
                 execSync('ls', { encoding: 'utf-8' });
                 const simpleGit = require('simple-git')('./');
                 simpleGit.fetch(branch, () => {
-                    simpleGit.checkout(branch, () => {
-                        // TODO Command to run pm2
-                        // execSync('npm start', { encoding: 'utf-8' });
-                        res.json({ "success": true, "message": "The branch changed successfully" });
-                        res.sendStatus(200);
-                    })
+                    try {
+                        simpleGit.checkout(branch, () => {
+                            // TODO Command to run pm2
+                            // execSync('npm start', { encoding: 'utf-8' });
+                            res.json({ "success": true, "message": "The branch changed successfully" });
+                            res.sendStatus(200);
+                        })
+                    } catch(e) {
+                        return errorBranchChange(e);
+                    }
                 })
                 return true;
             } catch (e) {
-                // Todo Remove Files To Write in case of failure
-                console.log("Failed To change Retry... ", e);
-                res.json({ "error": true, "message": "The branch couldn't be changed" });
-                res.sendStatus(500);
-                return false;
+                return errorBranchChange(e);
             }
         }
         command(branch);
     } catch (e) {
-        console.log('Error logged......', e);
-        res.sendStatus(500);
+        return errorBranchChange(e);
     }
 })
 
