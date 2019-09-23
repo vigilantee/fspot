@@ -84,9 +84,12 @@ router.post('/test/branch', (req, res, next) => {
         const branch = data.branch;
         const command = (branch = `master`) => {
             try {
+                // check if there is any change or not
+                let changeExist = executeCommand('git diff --exit-code && git diff --cached --exit-code');
+                console.log(changeExist);
                 const simpleGit = require('simple-git')('./');
                 simpleGit.fetch(branch, () => {
-                    try {
+                    try { 
                         simpleGit.checkout(branch, () => {
                             // TODO Command to run pm2
                             executeCommand('cd .. && cd client && npm i && npm run build');
