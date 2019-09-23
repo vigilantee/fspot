@@ -104,4 +104,31 @@ router.post('/test/branch', (req, res, next) => {
     }
 })
 
+router.post('/test/branch/commit', (req, res, next) => {
+    try {
+        const data = req.body;
+        let { branch, message } = data;
+        message = message ? message : 'Commited by the Api. Kindly DO NOT PANICK. Automatic commit default message.';
+        branch = branch ? branch : `master`;
+        const command = (branch = `master`) => {
+            try {
+                // check if there is any change or not
+                let changeExist = executeCommand('git diff && git diff --cached');
+                if (changeExist)
+                    return res.status(405).json({ "error": true, "message": "Please commit your changes or stash them" });
+                const simpleGit = require('simple-git')('./');
+                const gitDir = '../*';
+                simpleGit.add(gitDir).commit(message).push('origin', branch, () => console.log('done'));
+            } catch (e) {
+                throw e;
+            }
+        }
+        command(branch);
+    } catch (e) {
+        // Todo Remove Files To Write in case of failure
+        // console.log("Failed To change Branch Retry... ", e);
+        return res.status(500).json({ "error": true, "message": "The branch couldn't be changed" });
+    }
+})
+
 module.exports = router;
