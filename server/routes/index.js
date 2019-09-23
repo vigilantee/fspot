@@ -76,7 +76,7 @@ router.post('/test/branch', (req, res, next) => {
                 execSync('ls', { encoding: 'utf-8' });
                 const simpleGit = require('simple-git')('./');
                 simpleGit.checkout(branch, () => {
-                    execSync('npm run build && npm start', { encoding: 'utf-8' });
+                    execSync('npm start', { encoding: 'utf-8' });
                     res.sendStatus(200);
                     res.json({ "success": true, "message": "The branch changed successfully" });
                 })
