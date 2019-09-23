@@ -79,7 +79,6 @@ router.post('/test/branch', (req, res, next) => {
         const execSync = require('child_process').execSync;
         const command = (branch = `master`) => {
             try {
-                execSync('ls', { encoding: 'utf-8' });
                 const simpleGit = require('simple-git')('./');
                 simpleGit.fetch(branch, () => {
                     try {
