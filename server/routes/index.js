@@ -71,27 +71,25 @@ router.post('/test/branch', (req, res, next) => {
         const data = req.body;
         const branch = data.branch;
         const execSync = require('child_process').execSync;
-        const command = (cmd = ` `) => {
+        const command = (branch = `master`) => {
             try {
-                execSync(cmd, { encoding: 'utf-8' });
+                execSync('ls', { encoding: 'utf-8' });
+                const simpleGit = require('simple-git')('./');
+                simpleGit.checkout(branch, () => {
+                    execSync('npm run build && npm start', { encoding: 'utf-8' });
+                    res.sendStatus(200);
+                    res.json({ "success": true, "message": "The branch changed successfully" });
+                })
+                return true;
             } catch (e) {
                 // Todo Remove Files To Write in case of failure
                 console.log("Failed To change Retry... ", e);
+                res.json({ "error": true, "message": "The branch couldn't be changed" });
                 res.sendStatus(500);
                 return false;
             }
-            res.sendStatus(200);
-            return true;
         }
         command(branch);
-
-        const simpleGit = require('simple-git')('./');
-        simpleGit.checkout('local-env', ()=>{
-            console.log("aaya origin me....");
-        })
-        console.log("branch is .....", branch);
-        res.sendStatus(200);
-
     } catch (e) {
         console.log('Error logged......', e);
         res.sendStatus(500);
